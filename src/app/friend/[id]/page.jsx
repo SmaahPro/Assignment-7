@@ -40,7 +40,7 @@ export default async function FriendDetailsPage({ params }) {
                             {friend.tags && <span className="bg-green-100 text-green-700 px-4 py-1 rounded-full text-[10px] font-bold w-fit capitalize">{friend.tags[0]}</span>}
                         </div>
                         <p className="text-gray-500 text-sm mt-4 italic">"{friend.bio}"</p>
-                        <p className="text-gray-400 text-xs mt-2 font-medium">Preferred: email</p>
+                        <p className="text-gray-400 text-xs mt-2 font-medium">Email: {friend.email}</p>
                     </div>
 
                     <div className="flex flex-col gap-3">
