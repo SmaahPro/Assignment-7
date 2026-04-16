@@ -1,6 +1,6 @@
 import React from 'react';
 
-const page = () => {
+const TimelinePage = () => {
     return (
         <div>
             <h1>Timeline Page</h1>
@@ -8,4 +8,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default TimelinePage;
