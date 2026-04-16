@@ -8,15 +8,15 @@ export default async function HomePage() {
   const friendsData = JSON.parse(fileContents);
 
   const totalFriends = friendsData.length;
-  const onTrack = friendsData.filter(f => f.status === "on track").length;
-  const needAttention = friendsData.filter(f => f.status === "overdue" || f.status === "almost due").length;
+  const onTrack = friendsData.filter(f => f.status === "On-Track").length;
+  const needAttention = friendsData.filter(f => f.status === "Overdue" || f.status === "Almost Due").length;
   const interactions = friendsData.filter(f => f.days_since_contact <= 30).length;
 
   return (
     <main className="max-w-6xl mx-auto p-6">
       <section className="text-center py-10 mb-10 shadow-md rounded-[2rem] bg-white border border-gray-100">
         <h1 className="text-[38px] font-bold text-gray-800 leading-[1.3]">Friends to keep close in your life</h1>
-        <p className="text-gray-500 text-base mt-2">Your personal shelf of meaningful connections. Browse, tend, and nurture the relationships that matter most.</p>
+        <p className="text-gray-500 text-sm mt-2">Your personal shelf of meaningful connections. Browse, tend, and nurture the relationships that matter most.</p>
         <button className="mt-6 bg-[#1e463a] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#15352c] transition">+ Add a Friend</button>
       </section>
 
@@ -57,12 +57,12 @@ export default async function HomePage() {
                 <div className="flex flex-col gap-2 items-center">
                   <div className="flex gap-1 flex-wrap justify-center">
                     {friend.tags.map((tag, i) => (
-                      <span key={i} className="bg-green-100 text-green-700 text-[10px] px-3 py-1 rounded-full font-bold uppercase">{tag}</span>
+                      <span key={i} className="bg-green-100 text-green-900 text-[10px] px-3 py-1 rounded-full font-bold uppercase">{tag}</span>
                     ))}
                   </div>
 
-                  <span className={`text-[10px] px-4 py-1 rounded-full font-bold uppercase ${friend.status === 'overdue' ? 'bg-red-100 text-red-700' :
-                    friend.status === 'almost due' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'
+                  <span className={`text-[10px] px-4 py-1 rounded-full font-normal ${friend.status === 'Overdue' ? 'bg-red-600 text-white' :
+                    friend.status === 'Almost Due' ? 'bg-orange-400 text-white' : 'bg-green-900 text-white'
                     }`}>
                     {friend.status}
                   </span>

@@ -30,15 +30,15 @@ export default async function FriendDetailsPage({ params }) {
                             <h1 className="text-xl font-bold text-red-950 mb-4">{friend.name}</h1>
                         </div>
                         <div className="flex flex-col gap-2 items-center mb-4">
-                            <span className={`px-4 py-1 rounded-full text-xs font-bold w-fit uppercase ${friend.status === 'overdue'
-                                ? 'bg-red-100 text-red-700'
-                                : friend.status === 'almost due'
-                                    ? 'bg-orange-100 text-orange-700'
-                                    : 'bg-blue-100 text-blue-700'
+                            <span className={`px-4 py-1 rounded-full text-xs font-normal w-fit ${friend.status === 'Overdue'
+                                ? 'bg-red-600 text-white'
+                                : friend.status === 'Almost Due'
+                                    ? 'bg-orange-400 text-white'
+                                    : 'bg-green-900 text-white'
                                 }`}>
                                 {friend.status}
                             </span>
-                            {friend.tags && <span className="bg-green-100 text-green-700 px-4 py-1 rounded-full text-[10px] font-bold w-fit capitalize">{friend.tags[0]}</span>}
+                            {friend.tags && <span className="bg-green-100 text-green-900 px-4 py-1 rounded-full text-[10px] font-bold w-fit uppercase">{friend.tags[0]}</span>}
                         </div>
                         <p className="text-gray-500 text-sm mt-4 italic">"{friend.bio}"</p>
                         <p className="text-gray-400 text-xs mt-2 font-medium">Email: {friend.email}</p>
