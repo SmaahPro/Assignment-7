@@ -1,11 +1,22 @@
-import path from 'path';
-import { promises as fs } from 'fs';
+"use client";
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-export default async function HomePage() {
-  const filePath = path.join(process.cwd(), 'public', 'friends.json');
-  const fileContents = await fs.readFile(filePath, 'utf8');
-  const friendsData = JSON.parse(fileContents);
+export default function HomePage() {
+  const [friendsData, setFriendsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      fetch('/friends.json')
+        .then((res) => res.json())
+        .then((data) => {
+          setFriendsData(data);
+          setLoading(false);
+        });
+    }, 3000);
+  }, []);
 
   const totalFriends = friendsData.length;
   const onTrack = friendsData.filter(f => f.status === "On-Track").length;
@@ -25,17 +36,14 @@ export default async function HomePage() {
           <h2 className="text-3xl font-bold">{totalFriends}</h2>
           <p className="text-gray-500 text-sm">Total Friends</p>
         </div>
-
         <div className="text-center p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
           <h2 className="text-3xl font-bold">{onTrack}</h2>
           <p className="text-gray-500 text-sm">On Track</p>
         </div>
-
         <div className="text-center p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
           <h2 className="text-3xl font-bold">{needAttention}</h2>
           <p className="text-gray-500 text-sm">Need Attention</p>
         </div>
-
         <div className="text-center p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
           <h2 className="text-3xl font-bold">{interactions}</h2>
           <p className="text-gray-500 text-sm">Interactions This Month</p>
@@ -44,33 +52,44 @@ export default async function HomePage() {
 
       <section>
         <h2 className="text-2xl font-bold mb-4">Your Friends</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-14">
-          {friendsData.map((friend) => (
-            <Link href={`/friend/${friend.id}`} key={friend.id}>
-              <div className="border border-amber-50 p-6 rounded-3xl flex flex-col items-center shadow-sm hover:shadow-lg transition bg-white cursor-pointer h-full">
-                <div className="w-20 h-20 bg-gray-200 rounded-full mb-4 overflow-hidden">
-                  <img src={friend.picture} alt={friend.name} className="w-full h-full object-cover" />
-                </div>
-                <h3 className="font-bold text-red-950 text-lg">{friend.name}</h3>
-                <p className="text-gray-600 text-sm mb-3">{friend.days_since_contact}d ago</p>
 
-                <div className="flex flex-col gap-2 items-center">
-                  <div className="flex gap-1 flex-wrap justify-center">
-                    {friend.tags.map((tag, i) => (
-                      <span key={i} className="bg-green-100 text-green-900 text-[10px] px-3 py-1 rounded-full font-bold uppercase">{tag}</span>
-                    ))}
+        {loading ? (
+          <div className="flex justify-center items-center py-20">
+            <div className="flex flex-col items-center gap-4">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#1e463a]"></div>
+              <p className="text-gray-500 font-semibold">Loading your friends...</p>
+            </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-14">
+            {friendsData.map((friend) => (
+              <Link href={`/friend/${friend.id}`} key={friend.id}>
+                <div className="border border-amber-50 p-6 rounded-3xl flex flex-col items-center shadow-sm hover:shadow-lg transition bg-white cursor-pointer h-full">
+                  <div className="w-20 h-20 bg-gray-200 rounded-full mb-4 overflow-hidden">
+                    <img src={friend.picture} alt={friend.name} className="w-full h-full object-cover" />
                   </div>
+                  <h3 className="font-bold text-red-950 text-lg">{friend.name}</h3>
+                  <p className="text-gray-600 text-sm mb-3">{friend.days_since_contact}d ago</p>
 
-                  <span className={`text-[10px] px-4 py-1 rounded-full font-normal ${friend.status === 'Overdue' ? 'bg-red-600 text-white' :
-                    friend.status === 'Almost Due' ? 'bg-orange-400 text-white' : 'bg-green-900 text-white'
-                    }`}>
-                    {friend.status}
-                  </span>
+                  <div className="flex flex-col gap-2 items-center">
+                    <div className="flex gap-1 flex-wrap justify-center">
+                      {friend.tags.map((tag, i) => (
+                        <span key={i} className="bg-green-100 text-green-900 text-[10px] px-3 py-1 rounded-full font-bold uppercase">{tag}</span>
+                      ))}
+                    </div>
+
+                    <span className={`text-[10px] px-4 py-1 rounded-full font-normal ${friend.status === 'Overdue' ? 'bg-red-600 text-white' :
+                      friend.status === 'Almost Due' ? 'bg-orange-400 text-white' :
+                        'bg-green-900 text-white'
+                      }`}>
+                      {friend.status}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );
