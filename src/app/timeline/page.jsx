@@ -32,9 +32,18 @@ export default function TimelinePage() {
         <main className="w-full min-h-screen py-10 px-4 mb-10">
             <div className="max-w-2xl mx-auto">
 
-                <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-8">
-                    Timeline
-                </h1>
+                <div className="flex justify-between items-center mb-8">
+                    <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">
+                        Timeline
+                    </h1>
+
+                    <a
+                        href="/stats"
+                        className="bg-gray-900 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-gray-800 transition"
+                    >
+                        View Analytics
+                    </a>
+                </div>
 
                 <div className="mb-10 pb-6 border-b border-gray-200">
                     <select
