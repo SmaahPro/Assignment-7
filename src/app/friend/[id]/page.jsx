@@ -30,10 +30,10 @@ export default async function FriendDetailsPage({ params }) {
                         </div>
                         <div className="flex flex-col gap-2 items-center mb-4">
                             <span className={`px-4 py-1 rounded-full text-xs font-bold w-fit uppercase ${friend.status === 'overdue'
-                                    ? 'bg-red-100 text-red-700'
-                                    : friend.status === 'almost due'
-                                        ? 'bg-orange-100 text-orange-700'
-                                        : 'bg-blue-100 text-blue-700'
+                                ? 'bg-red-100 text-red-700'
+                                : friend.status === 'almost due'
+                                    ? 'bg-orange-100 text-orange-700'
+                                    : 'bg-blue-100 text-blue-700'
                                 }`}>
                                 {friend.status}
                             </span>

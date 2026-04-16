@@ -1,5 +1,6 @@
 import path from 'path';
 import { promises as fs } from 'fs';
+import Link from 'next/link';
 
 export default async function HomePage() {
   const filePath = path.join(process.cwd(), 'public', 'friends.json');
@@ -30,27 +31,29 @@ export default async function HomePage() {
         <h2 className="text-2xl font-bold mb-4">Your Friends</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-14">
           {friendsData.map((friend) => (
-            <div key={friend.id} className="border border-amber-100 p-6 rounded-3xl flex flex-col items-center shadow-sm hover:shadow-lg transition bg-white">
-              <div className="w-20 h-20 bg-gray-200 rounded-full mb-4 overflow-hidden">
-                <img src={friend.picture} alt={friend.name} className="w-full h-full object-cover" />
-              </div>
-              <h3 className="font-bold text-red-950 text-lg">{friend.name}</h3>
-              <p className="text-gray-600 text-sm mb-3">{friend.days_since_contact}d ago</p>
-
-              <div className="flex flex-col gap-2 items-center">
-                <div className="flex gap-1 flex-wrap justify-center">
-                  {friend.tags.map((tag, i) => (
-                    <span key={i} className="bg-green-100 text-green-700 text-[10px] px-3 py-1 rounded-full font-bold uppercase">{tag}</span>
-                  ))}
+            <Link href={`/friend/${friend.id}`} key={friend.id}>
+              <div className="border border-amber-100 p-6 rounded-3xl flex flex-col items-center shadow-sm hover:shadow-lg transition bg-white cursor-pointer h-full">
+                <div className="w-20 h-20 bg-gray-200 rounded-full mb-4 overflow-hidden">
+                  <img src={friend.picture} alt={friend.name} className="w-full h-full object-cover" />
                 </div>
+                <h3 className="font-bold text-red-950 text-lg">{friend.name}</h3>
+                <p className="text-gray-600 text-sm mb-3">{friend.days_since_contact}d ago</p>
 
-                <span className={`text-[10px] px-4 py-1 rounded-full font-bold uppercase ${friend.status === 'overdue' ? 'bg-red-100 text-red-700' :
-                  friend.status === 'almost due' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'
-                  }`}>
-                  {friend.status}
-                </span>
+                <div className="flex flex-col gap-2 items-center">
+                  <div className="flex gap-1 flex-wrap justify-center">
+                    {friend.tags.map((tag, i) => (
+                      <span key={i} className="bg-green-100 text-green-700 text-[10px] px-3 py-1 rounded-full font-bold uppercase">{tag}</span>
+                    ))}
+                  </div>
+
+                  <span className={`text-[10px] px-4 py-1 rounded-full font-bold uppercase ${friend.status === 'overdue' ? 'bg-red-100 text-red-700' :
+                    friend.status === 'almost due' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'
+                    }`}>
+                    {friend.status}
+                  </span>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
