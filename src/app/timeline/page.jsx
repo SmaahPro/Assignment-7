@@ -19,9 +19,6 @@ export default function TimelinePage() {
             case "video":
                 return <FaVideo className="text-purple-500" />;
             case "call":
-            case "audio":
-                return <FaPhone className="text-green-500" />;
-            default:
                 return <FaPhone className="text-green-500" />;
         }
     };
@@ -32,7 +29,7 @@ export default function TimelinePage() {
     });
 
     return (
-        <main className="w-full min-h-screen py-10 px-4">
+        <main className="w-full min-h-screen py-10 px-4 mb-10">
             <div className="max-w-2xl mx-auto">
 
                 <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-8">
@@ -47,7 +44,7 @@ export default function TimelinePage() {
                         style={{ width: "200px" }}
                     >
                         <option value="all">Filter timeline</option>
-                        <option value="audio">Audio</option>
+                        <option value="call">Call</option>
                         <option value="video">Video</option>
                         <option value="text">Text</option>
                     </select>

@@ -2,6 +2,7 @@ import path from 'path';
 import { promises as fs } from 'fs';
 import { notFound } from 'next/navigation';
 import { FaPhone, FaComment, FaVideo, FaClock, FaArchive, FaTrash, FaEdit } from 'react-icons/fa';
+import QuickCheckIn from '@/components/shared/QuickCheckIn';
 
 export default async function FriendDetailsPage({ params }) {
     const { id } = await params;
@@ -70,13 +71,8 @@ export default async function FriendDetailsPage({ params }) {
                         </p>
                     </div>
 
-                    <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 mb-5">
-                        <h3 className="font-bold text-gray-800 text-lg mb-6">Quick Check-In</h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                            <button className="bg-gray-50 border border-gray-200 p-8 rounded-2xl flex flex-col items-center gap-3"><FaPhone className="text-2xl text-[#1e463a]" /><span className="text-sm font-semibold">Call</span></button>
-                            <button className="bg-gray-50 border border-gray-200 p-8 rounded-2xl flex flex-col items-center gap-3"><FaComment className="text-2xl text-[#1e463a]" /><span className="text-sm font-semibold">Text</span></button>
-                            <button className="bg-gray-50 border border-gray-200 p-8 rounded-2xl flex flex-col items-center gap-3"><FaVideo className="text-2xl text-[#1e463a]" /><span className="text-sm font-semibold">Video</span></button>
-                        </div>
+                    <div className="w-full">
+                        <QuickCheckIn friendName={friend.name} />
                     </div>
                 </div>
             </div>
