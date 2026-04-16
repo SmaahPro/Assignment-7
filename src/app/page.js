@@ -15,16 +15,31 @@ export default async function HomePage() {
   return (
     <main className="max-w-6xl mx-auto p-6">
       <section className="text-center py-10 mb-10 shadow-md rounded-[2rem] bg-white border border-gray-100">
-        <h1 className="text-4xl font-bold text-gray-800">Friends to keep close in your life</h1>
-        <p className="text-gray-500 text-sm mt-3">Your personal shelf of meaningful connections. Browse, tend, and nurture the relationships that matter most.</p>
+        <h1 className="text-[38px] font-bold text-gray-800 leading-[1.3]">Friends to keep close in your life</h1>
+        <p className="text-gray-500 text-base mt-2">Your personal shelf of meaningful connections. Browse, tend, and nurture the relationships that matter most.</p>
         <button className="mt-6 bg-[#1e463a] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#15352c] transition">+ Add a Friend</button>
       </section>
 
-      <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14 p-6 rounded-[2rem] shadow-md bg-white border border-gray-100">
-        <div className="text-center"><h2 className="text-3xl font-bold">{totalFriends}</h2><p className="text-gray-500 text-sm">Total Friends</p></div>
-        <div className="text-center"><h2 className="text-3xl font-bold">{onTrack}</h2><p className="text-gray-500 text-sm">On Track</p></div>
-        <div className="text-center"><h2 className="text-3xl font-bold">{needAttention}</h2><p className="text-gray-500 text-sm">Need Attention</p></div>
-        <div className="text-center"><h2 className="text-3xl font-bold">{interactions}</h2><p className="text-gray-500 text-sm">Interactions This Month</p></div>
+      <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14">
+        <div className="text-center p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+          <h2 className="text-3xl font-bold">{totalFriends}</h2>
+          <p className="text-gray-500 text-sm">Total Friends</p>
+        </div>
+
+        <div className="text-center p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+          <h2 className="text-3xl font-bold">{onTrack}</h2>
+          <p className="text-gray-500 text-sm">On Track</p>
+        </div>
+
+        <div className="text-center p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+          <h2 className="text-3xl font-bold">{needAttention}</h2>
+          <p className="text-gray-500 text-sm">Need Attention</p>
+        </div>
+
+        <div className="text-center p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+          <h2 className="text-3xl font-bold">{interactions}</h2>
+          <p className="text-gray-500 text-sm">Interactions This Month</p>
+        </div>
       </section>
 
       <section>
@@ -32,7 +47,7 @@ export default async function HomePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-14">
           {friendsData.map((friend) => (
             <Link href={`/friend/${friend.id}`} key={friend.id}>
-              <div className="border border-amber-100 p-6 rounded-3xl flex flex-col items-center shadow-sm hover:shadow-lg transition bg-white cursor-pointer h-full">
+              <div className="border border-amber-50 p-6 rounded-3xl flex flex-col items-center shadow-sm hover:shadow-lg transition bg-white cursor-pointer h-full">
                 <div className="w-20 h-20 bg-gray-200 rounded-full mb-4 overflow-hidden">
                   <img src={friend.picture} alt={friend.name} className="w-full h-full object-cover" />
                 </div>
