@@ -5,7 +5,7 @@ KeenKeeper is a comprehensive web application designed to help users maintain me
 
 
 ## 🚀 Technologies Used
-* **Frontend :** React.js, Next.js
+* **Frontend :** Next.js, React.js 
 * **Styling :** Tailwind CSS, DaisyUI
 * **Icons :** React Icons
 * **Data Persistence :** LocalStorage API
