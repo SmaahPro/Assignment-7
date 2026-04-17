@@ -1,7 +1,7 @@
 import path from 'path';
 import { promises as fs } from 'fs';
 import { notFound } from 'next/navigation';
-import { FaPhone, FaComment, FaVideo, FaClock, FaArchive, FaTrash, FaEdit } from 'react-icons/fa';
+import { FaClock, FaArchive, FaTrash, FaEdit } from 'react-icons/fa';
 import QuickCheckIn from '@/components/shared/QuickCheckIn';
 
 export default async function FriendDetailsPage({ params }) {
@@ -12,6 +12,15 @@ export default async function FriendDetailsPage({ params }) {
 
     const friend = friendsData.find((f) => f.id === parseInt(id));
     if (!friend) notFound();
+
+    const formatStatus = (status) => {
+        if (status === 'on-track') return 'On-Truck';
+
+        return status
+            .split(/[- ]+/)
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    };
 
     const formattedDate = new Date(friend.next_due_date).toLocaleDateString('en-US', {
         month: 'short', day: 'numeric', year: 'numeric'
@@ -30,15 +39,24 @@ export default async function FriendDetailsPage({ params }) {
                             <h1 className="text-xl font-bold text-red-950 mb-4">{friend.name}</h1>
                         </div>
                         <div className="flex flex-col gap-2 items-center mb-4">
-                            <span className={`px-4 py-1 rounded-full text-xs font-normal w-fit ${friend.status === 'Overdue'
+                            <span className={`px-4 py-1 rounded-full text-xs font-normal w-fit ${friend.status === 'overdue'
                                 ? 'bg-red-600 text-white'
-                                : friend.status === 'Almost Due'
+                                : friend.status === 'almost due'
                                     ? 'bg-orange-400 text-white'
                                     : 'bg-green-900 text-white'
                                 }`}>
-                                {friend.status}
+                                {formatStatus(friend.status)}
                             </span>
-                            {friend.tags && <span className="bg-green-100 text-green-900 px-4 py-1 rounded-full text-[10px] font-bold w-fit uppercase">{friend.tags[0]}</span>}
+
+                            {friend.tags && (
+                                <div className="flex gap-1 flex-wrap justify-center mt-2">
+                                    {friend.tags.map((tag, index) => (
+                                        <span key={index} className="bg-green-100 text-green-900 px-3 py-1 rounded-full text-[10px] font-bold uppercase">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                         <p className="text-gray-500 text-sm mt-4 italic">"{friend.bio}"</p>
                         <p className="text-gray-400 text-xs mt-2 font-medium">Email : {friend.email}</p>

@@ -7,6 +7,15 @@ export default function HomePage() {
   const [friendsData, setFriendsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const formatStatus = (status) => {
+    if (status === 'on-track') return 'On-Truck';
+
+    return status
+      .split(/[- ]+/)
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
   useEffect(() => {
     setTimeout(() => {
       fetch('/friends.json')
@@ -19,8 +28,8 @@ export default function HomePage() {
   }, []);
 
   const totalFriends = friendsData.length;
-  const onTrack = friendsData.filter(f => f.status === "On-Track").length;
-  const needAttention = friendsData.filter(f => f.status === "Overdue" || f.status === "Almost Due").length;
+  const onTrack = friendsData.filter(f => f.status === "on-track").length;
+  const needAttention = friendsData.filter(f => f.status === "overdue" || f.status === "almost due").length;
   const interactions = friendsData.filter(f => f.days_since_contact <= 30).length;
 
   return (
@@ -78,11 +87,11 @@ export default function HomePage() {
                       ))}
                     </div>
 
-                    <span className={`text-[10px] px-4 py-1 rounded-full font-normal ${friend.status === 'Overdue' ? 'bg-red-600 text-white' :
-                      friend.status === 'Almost Due' ? 'bg-orange-400 text-white' :
+                    <span className={`text-[10px] px-4 py-1 rounded-full font-normal ${friend.status === 'overdue' ? 'bg-red-600 text-white' :
+                      friend.status === 'almost due' ? 'bg-orange-400 text-white' :
                         'bg-green-900 text-white'
                       }`}>
-                      {friend.status}
+                      {formatStatus(friend.status)}
                     </span>
                   </div>
                 </div>

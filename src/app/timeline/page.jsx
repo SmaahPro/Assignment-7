@@ -23,7 +23,7 @@ export default function TimelinePage() {
         const updatedData = timelineData.filter((_, index) => index !== indexToDelete);
         setTimelineData(updatedData);
         localStorage.setItem("myTimeline", JSON.stringify(updatedData));
-        window.dispatchEvent(new Event("storage")); // ডিলিট করলেও সিগনাল পাঠান
+        window.dispatchEvent(new Event("storage"));
     };
 
     const getIcon = (type) => {
