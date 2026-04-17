@@ -71,12 +71,21 @@ export default function StatsPage() {
                                         outerRadius={100}
                                         paddingAngle={5}
                                         dataKey="value"
+                                        isAnimationActive={true}
+                                        stroke="none"
+                                        activeIndex={undefined}
+                                        activeShape={undefined}
                                     >
                                         {data.map((entry, index) => (
-                                            <Cell key={`cell-${index}`} fill={COLORS[entry.name]} />
+                                            <Cell
+                                                key={`cell-${index}`}
+                                                fill={COLORS[entry.name]}
+                                                stroke="none"
+                                                style={{ outline: 'none' }}
+                                            />
                                         ))}
                                     </Pie>
-                                    <Tooltip content={<CustomTooltip />} />
+                                    <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'none' }} />
                                 </PieChart>
                             </ResponsiveContainer>
                         )}
