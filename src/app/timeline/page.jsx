@@ -58,35 +58,37 @@ export default function TimelinePage() {
                     {filteredData.length === 0 ? (
                         <p className="text-gray-400 text-center">No activities recorded yet.</p>
                     ) : (
-                        timelineData.map((item, index) => {
-                            if (filter !== "all" && item.type?.toLowerCase() !== filter.toLowerCase()) return null;
-
-                            return (
-                                <div
-                                    key={index}
-                                    className="flex items-center gap-4 p-4 bg-white border border-gray-100 shadow-sm rounded-2xl hover:border-gray-200 transition"
-                                >
-                                    <div className="w-12 h-12 flex items-center justify-center bg-gray-50 rounded-full flex-shrink-0">
-                                        {getIcon(item.type)}
-                                    </div>
-
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-gray-900 font-bold text-lg truncate">
-                                            <span className="capitalize">{item.type}</span> with {item.friendName}
-                                        </p>
-                                        <p className="text-sm text-gray-400">{item.date}</p>
-                                    </div>
-
-                                    <button
-                                        onClick={() => handleDelete(index)}
-                                        className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
-                                        title="Delete Activity"
-                                    >
-                                        <FaTrash size={16} />
-                                    </button>
+                        filteredData.map((item, index) => (
+                            <div
+                                key={index}
+                                className="flex items-center gap-4 p-4 bg-white border border-gray-100 shadow-sm rounded-2xl hover:border-gray-200 transition"
+                            >
+                                <div className="w-12 h-12 flex items-center justify-center bg-gray-50 rounded-full flex-shrink-0">
+                                    {getIcon(item.type)}
                                 </div>
-                            );
-                        })
+
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-gray-900 font-bold text-lg truncate">
+                                        <span className="capitalize">{item.type}</span> with {item.friendName}
+                                    </p>
+                                    <p className="text-sm text-gray-400">
+                                        {new Date(item.date).toLocaleDateString('en-GB', {
+                                            day: 'numeric',
+                                            month: 'long',
+                                            year: 'numeric'
+                                        })}
+                                    </p>
+                                </div>
+
+                                <button
+                                    onClick={() => handleDelete(index)}
+                                    className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
+                                    title="Delete Activity"
+                                >
+                                    <FaTrash size={16} />
+                                </button>
+                            </div>
+                        ))
                     )}
                 </div>
             </div>
