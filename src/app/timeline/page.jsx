@@ -36,7 +36,6 @@ export default function TimelinePage() {
                     <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">
                         Timeline
                     </h1>
-
                     <a
                         href="/stats"
                         className="bg-gray-900 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-gray-800 transition"
