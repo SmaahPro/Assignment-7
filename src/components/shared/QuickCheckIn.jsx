@@ -9,9 +9,7 @@ export default function QuickCheckIn({ friendName }) {
         const newEntry = {
             type: type,
             friendName: friendName,
-            date: new Date().toLocaleDateString('en-US', {
-                month: 'short', day: 'numeric', year: 'numeric'
-            })
+            date: new Date().toISOString() 
         };
 
         const existingData = JSON.parse(localStorage.getItem('myTimeline') || '[]');
